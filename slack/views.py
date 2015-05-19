@@ -14,23 +14,21 @@ redis = redis.from_url(redis_url)
 @csrf_exempt
 def link(request):
 	text = request.POST.get('text', '')
-	usage = "Usage: /link set <key> <url> | get <key> | list"
-	if text == '':
-		response = usage
-	elif text == 'list':
-		keys = redis.hkeys('links')
-		keys.sort()
-		response = 'Links available: '+','.join(keys)
-	else:
+	usage = "Usage: /link <key> <url> | <key> | list"
+	response = usage
+	if text != '':
 		bits = text.split(' ')
-		if bits[0] == 'set' and len(bits) == 3:
-			redis.hset('links', bits[1], bits[2])
-			response = 'Have set '+bits[1]+' to link to '+bits[2]
-		elif bits[0] == 'get' and len(bits) == 2:
-			response = redis.hget('links', bits[1])
-			if response == None:
-				response = "Link does not exist."
-		else:
-			response = usage
+		if len(bits) == 1:
+			if text == 'list':
+				keys = redis.hkeys('links')
+				keys.sort()
+				response = 'Links available: '+','.join(keys)
+			else:
+				response = '{{'+redis.hget('links', bits[0])+'}}'
+				if response == None:
+					response = "Link does not exist."
+		elif len(bits) == 2:
+			redis.hset('links', bits[0], bits[1])
+			response = 'Have set '+bits[0]+' to link to '+bits[1]
 
 	return HttpResponse(response)
