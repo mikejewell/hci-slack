@@ -18,17 +18,17 @@ def link(request):
 	if text == '':
 		response = usage
 	elif text == 'list':
-		pass
+		response = "Coming soon"
 	else:
 		bits = text.split(' ')
-		if len(bits) != 2:
-			response = usage
-		elif bits[0] == 'set':
+		elif bits[0] == 'set' and len(bits) == 3:
 			redis.hset('links', bits[1], bits[2])
 			response = 'Have set '+bits[1]+' to link to '+bits[2]
-		elif bits[0] == 'get':
+		elif bits[0] == 'get' and len(bits) == 2:
 			response = redis.hget('links', bits[1])
 			if response == None:
 				response = "Link does not exist."
+		else:
+			response = usage
 
 	return HttpResponse(response)
