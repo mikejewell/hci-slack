@@ -24,7 +24,7 @@ def link(request):
 				keys.sort()
 				response = 'Links available: '+','.join(keys)
 			else:
-				response = '{{'+redis.hget('links', bits[0])+'}}'
+				response = '<'+redis.hget('links', bits[0])+'>'
 				if response == None:
 					response = "Link does not exist."
 		elif len(bits) == 2:
