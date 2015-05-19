@@ -13,7 +13,7 @@ redis = redis.from_url(redis_url)
 @require_http_methods(["POST"])
 @csrf_exempt
 def link(request):
-	text = request.post.get('text', '')
+	text = request.POST.get('text', '')
 	usage = "Usage: /link set <key> <url> | get <key> | list"
 	if text == '':
 		response = usage
