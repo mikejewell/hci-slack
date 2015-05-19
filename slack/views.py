@@ -28,7 +28,11 @@ def link(request):
 				if response == None:
 					response = "Link does not exist."
 		elif len(bits) == 2:
-			redis.hset('links', bits[0], bits[1])
-			response = 'Have set '+bits[0]+' to link to '+bits[1]
+			if bits[0] == 'rm':
+				redis.hdel('links', [bits[1]])
+				response = "Removed link"
+			else:
+				redis.hset('links', bits[0], bits[1])
+				response = 'Have set '+bits[0]+' to link to '+bits[1]
 
 	return HttpResponse(response)
