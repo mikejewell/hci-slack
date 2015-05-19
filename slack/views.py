@@ -18,10 +18,12 @@ def link(request):
 	if text == '':
 		response = usage
 	elif text == 'list':
-		response = "Coming soon"
+		keys = redis.hkeys('links')
+		keys.sort()
+		response = 'Links available: '+','.join(keys)
 	else:
 		bits = text.split(' ')
-		elif bits[0] == 'set' and len(bits) == 3:
+		if bits[0] == 'set' and len(bits) == 3:
 			redis.hset('links', bits[1], bits[2])
 			response = 'Have set '+bits[1]+' to link to '+bits[2]
 		elif bits[0] == 'get' and len(bits) == 2:
