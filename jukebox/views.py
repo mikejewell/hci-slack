@@ -40,7 +40,7 @@ def index(request):
 			track = results[0]
 			artist = track['artists'][0]
 			sp.user_playlist_add_tracks(settings.SPOTIFY_USERNAME, settings.SPOTIFY_PLAYLIST_ID, [track['id']])
-			url = "https://play.spotify.com/user/"+settings.SPOTIFY_USERNAME+"/playlist/"+settings.SPOTIFY_PLAYLIST_ID
+			url = "https://play.spotify.com/track/"+str(track['id'])
 			utils.send_message("@"+username+" added track: *"+track['name']+" ("+artist['name']+")* to the shared playlist (<"+url+">)", 
 				channel="@mikej",
 				username="Jukebox",
