@@ -18,5 +18,5 @@ from django.contrib import admin
 from slack import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^link', views.link, name='home')
+    url(r'^help', views.help, name='home')
 ]

@@ -12,7 +12,7 @@ redis = redis.from_url(redis_url)
 
 @require_http_methods(["POST"])
 @csrf_exempt
-def link(request):
+def help(request):
 	text = request.POST.get('text', '')
 	usage = "Help Entries:\n /h <key> - look up a help entry\n/h list - show available help entries\n/h <key> <text> - create a new help entry\n/link rm <key> - remove a help entry"
 	response = usage
