@@ -2,6 +2,7 @@ from django.http import HttpResponseForbidden, HttpResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.conf import settings
 
 import os
 import redis
@@ -13,6 +14,9 @@ redis = redis.from_url(redis_url)
 @require_http_methods(["POST"])
 @csrf_exempt
 def index(request):
+	if request.POST.get('token') != settings.HELP_SLACK_TOKEN:
+		return HttpResponseForbidden()
+
 	text = request.POST.get('text', '')
 	usage = "Help Entries:\n /h <key> - look up a help entry\n/h list - show available help entries\n/h <key> <text> - create a new help entry\n/h rm <key> - remove a help entry"
 	response = usage

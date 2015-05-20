@@ -21,6 +21,8 @@ logger = logging.getLogger('testlogger')
 @require_http_methods(["POST"])
 @csrf_exempt
 def index(request):
+	if request.POST.get('token') != settings.JUKEBOX_SLACK_TOKEN:
+		return HttpResponseForbidden()
 	text = request.POST.get('text', '')
 	token = auth.get_cached_token()
 	if token:

@@ -19,9 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+HELP_SLACK_TOKEN = os.environ.get('HELP_SLACK_TOKEN')
+JUKEBOX_SLACK_TOKEN = os.environ.get('JUKEBOX_SLACK_TOKEN')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
-SLACK_TOKEN = os.environ.get('SLACK_TOKEN')
 SPOTIFY_KEY = os.environ.get('SPOTIFY_KEY')
 SPOTIFY_SECRET = os.environ.get('SPOTIFY_SECRET')
 SPOTIFY_USERNAME = os.environ.get('SPOTIFY_USERNAME')
