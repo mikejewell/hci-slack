@@ -21,6 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
+SLACK_TOKEN = os.environ.get('SLACK_TOKEN')
+SPOTIFY_KEY = os.environ.get('SPOTIFY_KEY')
+SPOTIFY_SECRET = os.environ.get('SPOTIFY_SECRET')
+SPOTIFY_USERNAME = os.environ.get('SPOTIFY_USERNAME')
+SPOTIFY_PLAYLIST_ID = os.environ.get('SPOTIFY_PLAYLIST_ID')
+SPOTIFY_REDIRECT_URI = os.environ.get('SPOTIFY_REDIRECT_URI')
 
 ALLOWED_HOSTS = []
 
@@ -34,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'help',
+    'jukebox',
 )
 
 MIDDLEWARE_CLASSES = (
