@@ -8,10 +8,10 @@ Uses a Redis backend to store/retrieve useful information for the group (e.g. li
 
 #### Usage
 
-* /h <key> <value> - creates an entry in the help database (e.g. /h wiki This is our fantastic wiki: <url here>)
-* /h <key> - retrieves an entry from the help database (e.g. /h wiki)
+* /h &lt;key&gt; &lt;value&gt; - creates an entry in the help database (e.g. /h wiki This is our fantastic wiki: <url here>)
+* /h &lt;key&gt; - retrieves an entry from the help database (e.g. /h wiki)
 * /h list - lists all entry keys
-* /h rm <key> - removes an entry from the help database (e.g. /h rm wiki)
+* /h rm &lt;key&gt; - removes an entry from the help database (e.g. /h rm wiki)
 
 #### Required Environmental Variables
 
@@ -25,7 +25,7 @@ Once set up, you first need to head to http://yourapp.com/jukebox/authorise. Thi
 
 #### Usage
 
-* /jukebox <search> - e.g. /jukebox Creep. Adds the first search result to the playlist.
+* /jukebox &lt;search&gt; - e.g. /jukebox Creep. Adds the first search result to the playlist.
 
 #### Required Environmental Variables
 
