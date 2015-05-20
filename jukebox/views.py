@@ -18,12 +18,11 @@ auth = SpotifyOAuth(
 import logging
 logger = logging.getLogger('testlogger')
 
-# @require_http_methods(["POST"])
+@require_http_methods(["POST"])
 @csrf_exempt
 def index(request):
-	text = request.GET.get('text', '')
+	text = request.POST.get('text', '')
 	token = auth.get_cached_token()['access_token']
-	logger.info(str(token))
 	if token:
 		sp = spotipy.Spotify(auth=token)
 		sp.trace = False
@@ -48,5 +47,4 @@ def callback(request):
 	code = request.GET.get('code')
 	state = request.GET.get('state')
 	token = auth.get_access_token(code)
-	logger.info("Storing at "+auth.cache_path)
 	return HttpResponse(str(token))
