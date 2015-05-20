@@ -14,7 +14,7 @@ redis = redis.from_url(redis_url)
 @csrf_exempt
 def help(request):
 	text = request.POST.get('text', '')
-	usage = "Help Entries:\n /h <key> - look up a help entry\n/h list - show available help entries\n/h <key> <text> - create a new help entry\n/link rm <key> - remove a help entry"
+	usage = "Help Entries:\n /h <key> - look up a help entry\n/h list - show available help entries\n/h <key> <text> - create a new help entry\n/h rm <key> - remove a help entry"
 	response = usage
 	if text != '':
 		bits = text.split(' ', 1)
