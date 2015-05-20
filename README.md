@@ -1,6 +1,12 @@
 # HCI-Slack
 
-HCI-Slack is a set of Django Slack apps used by our HCI research sub-group at ECS (http://www.ecs.soton.ac.uk/). Currently this includes:
+HCI-Slack is a set of Django Slack apps used by our HCI research sub-group at ECS (http://www.ecs.soton.ac.uk/). They're all bundled into one project here, but you can easily separate them out if you wish.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+### General Requirements
+
+HCI-Slack uses Redis for help entries, so you'll need Redis To Go or similar if you're on Heroku. It also requires a few environmental variables, shown below.
 
 ### Help Entries
 
