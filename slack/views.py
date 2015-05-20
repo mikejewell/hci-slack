@@ -24,17 +24,18 @@ def help(request):
 				keys.sort()
 				response = 'Entries available: '+', '.join(keys)
 			else:
-				if response == None:
+				entry = redis.hget('help', bits[0])
+				if entry == None:
 					response = "Entry does not exist."
 				else:
-					response = "```"+redis.hget('help', bits[0])+"```"
+					response = "```"+entry+"```"
 		elif len(bits) == 2:
 			if bits[0] == 'rm':
 				redis.hdel('help', bits[1])
-				response = "Removed entry: "+bits[1]
+				response = "Removed entry: *"+bits[1]+"*"
 			else:
 				if bits[0] != 'rm' and bits[0] != 'list':
 					redis.hset('help', bits[0], bits[1])
-					response = 'Have set '+bits[0]+' to show ```'+bits[1]+'```'
+					response = 'Have set *'+bits[0]+'* to show ```'+bits[1]+'```'
 
 	return HttpResponse(response)
