@@ -1,6 +1,8 @@
 # HCI-Slack
 
-HCI-Slack is a set of Django Slack apps used by our HCI research sub-group at ECS (http://www.ecs.soton.ac.uk/). Currently this includes:
+HCI-Slack is a set of Django Slack apps used by our HCI research sub-group at ECS (http://www.ecs.soton.ac.uk/). 
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ### Help Entries
 
