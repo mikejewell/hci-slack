@@ -46,7 +46,7 @@ def index(request):
 					redis.hset('help', bits[0], bits[1])
 					response = 'Have set *'+bits[0]+'* to show ```'+bits[1]+'```'
 					utils.send_message("@"+username+" added *"+bits[0]+"* to show ```"+bits[1]+"```", 
-						channel="#general",
+						channel=settings.SLACK_GENERAL_CHAT,
 					)
 
 	return HttpResponse(response)
