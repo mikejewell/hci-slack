@@ -3,7 +3,7 @@ from django.conf import settings
 import requests
 import json
 
-def send_message(text, username=None, icon_emoji=":ghost:", icon_url=None, channel=None, attachments=None, unfurl_links=False):
+def send_message(text, username=None, icon_emoji=None, icon_url=None, channel=None, attachments=None, unfurl_links=False):
 	payload = {}
 	if username: payload['username'] = username
 	if icon_emoji: payload['icon_emoji'] = icon_emoji
