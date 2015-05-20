@@ -48,5 +48,5 @@ def callback(request):
 	code = request.GET.get('code')
 	state = request.GET.get('state')
 	token = auth.get_access_token(code)
-	logger.info("Storing at "+token.cache_path)
+	logger.info("Storing at "+auth.cache_path)
 	return HttpResponse(str(token))
