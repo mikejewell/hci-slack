@@ -32,7 +32,8 @@ def link(request):
 				redis.hdel('links', bits[1])
 				response = "Removed link: "+bits[1]
 			else:
-				redis.hset('links', bits[0], bits[1])
-				response = 'Have set '+bits[0]+' to link to '+bits[1]
+				if bits[0] != 'rm' and bits[0] != 'list':
+					redis.hset('links', bits[0], bits[1])
+					response = 'Have set '+bits[0]+' to link to '+bits[1]
 
 	return HttpResponse(response)
