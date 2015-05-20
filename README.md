@@ -8,6 +8,10 @@ HCI-Slack is a set of Django Slack apps used by our HCI research sub-group at EC
 
 HCI-Slack uses Redis for help entries, so you'll need Redis To Go or similar if you're on Heroku. It also requires a few environmental variables, shown below.
 
+* SLACK_WEBHOOK_URL - ingoing webhook URL
+* SLACK_GENERAL_CHAT - where work-related messages should go (i.e. help responses)
+* SLACK_RANDOM_CHAT - where non-work-related messages should go (i.e. added a track to jukebox)
+
 ### Help Entries
 
 Uses a Redis backend to store/retrieve useful information for the group (e.g. links to pages, conference details, etc). 
@@ -41,3 +45,7 @@ Once set up, you first need to head to http://yourapp.com/jukebox/authorise. Thi
 * SPOTIFY_USERNAME: The user who owns the playlist
 * SPOTIFY_PLAYLIST_ID: The ID of the playlist that you're sharing
 * SPOTIFY_REDIRECT_URI: Should be http://yoursite.com/jukebox/callback
+
+### Miscellanous
+
+slack.utils has a utility function, send_message, which uses the incoming web hook to send a message as any bot, to any channel. The only required parameter is 'text', with username, icon_emoji, icon_url, channel, attachements, and unfurl_links all being optional.
