@@ -1,0 +1,6 @@
+{
+  "name": "HCI-Slack",
+  "description": "Slack apps for Django",
+  "repository": "https://github.com/mikejewell/hci-slack",
+  "keywords": ["slack", "spotify", "help", "django"]
+}
