@@ -3,6 +3,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
+from slack import utils
 
 import os
 import redis
@@ -42,5 +43,8 @@ def index(request):
 				if bits[0] != 'rm' and bits[0] != 'list':
 					redis.hset('help', bits[0], bits[1])
 					response = 'Have set *'+bits[0]+'* to show ```'+bits[1]+'```'
+					utils.send_message("@"+username+" added *"+bits[0]+"* to show ```"+bits[1]+"```", 
+						channel="#general",
+					)
 
 	return HttpResponse(response)
