@@ -22,7 +22,7 @@ logger = logging.getLogger('testlogger')
 @csrf_exempt
 def index(request):
 	text = request.GET.get('text', '')
-	token = auth.get_cached_token()
+	token = auth.get_cached_token()['access_token']
 	logger.info(str(token))
 	if token:
 		sp = spotipy.Spotify(auth=token)
