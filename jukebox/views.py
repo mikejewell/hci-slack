@@ -21,18 +21,16 @@ def index(request):
 	text = request.POST.get('text', '')
 	token = auth.get_cached_token()
 	if token:
-		sp_client = spotipy.Spotify()
-		sp_auth = spotipy.Spotify(auth=token)
-		sp_auth.trace = False
-		sp_client.trace = False
-		search_result = sp_client.search(text)
+		sp = spotipy.Spotify(auth=token)
+		sp.trace = False
+		search_result = sp.search(text)
 		results = search_result['tracks']['items']
 		if len(results) == 0:
 			response = "Could not find any tracks :("
 		else:
 			track = results[0]
 			artist = track['artists'][0]
-			sp_auth.user_playlist_add_tracks(settings.SPOTIFY_USERNAME, settings.SPOTIFY_PLAYLIST_ID, [track['id']])
+			sp.user_playlist_add_tracks(settings.SPOTIFY_USERNAME, settings.SPOTIFY_PLAYLIST_ID, [track['id']])
 			response = "Added track: *"+track['name']+" ("+artist['name']+")*"
 	else:
 		response = "Couldn't get token - maybe try authorizing again."
@@ -46,4 +44,4 @@ def callback(request):
 	code = request.GET.get('code')
 	state = request.GET.get('state')
 	token = auth.get_access_token(code)
-	return HttpResponse("Authorized!")
+	return HttpResponse(str(token))
