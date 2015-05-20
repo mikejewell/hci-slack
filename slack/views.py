@@ -14,7 +14,7 @@ redis = redis.from_url(redis_url)
 @csrf_exempt
 def link(request):
 	text = request.POST.get('text', '')
-	usage = "Usage: /link <key> <url> | <key> | list"
+	usage = "Usage: /link <key> | list | <key> <url> | rm <key>"
 	response = usage
 	if text != '':
 		bits = text.split(' ')
@@ -29,7 +29,7 @@ def link(request):
 					response = "Link does not exist."
 		elif len(bits) == 2:
 			if bits[0] == 'rm':
-				redis.hdel('links', [bits[1]])
+				redis.hdel('links', bits[1])
 				response = "Removed link: "+bits[1]
 			else:
 				redis.hset('links', bits[0], bits[1])
