@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 
 from spotipy.oauth2 import SpotifyOAuth
+import spotipy
 
 auth = SpotifyOAuth(
 	settings.SPOTIFY_KEY, 
@@ -20,7 +21,7 @@ def index(request):
 	text = request.POST.get('text', '')
 	token = auth.get_cached_token()
 	if token:
-		sp = spotify.Spotify(auth=token)
+		sp = spotipy.Spotify(auth=token)
 		sp.trace = False
 		search_result = sp.search(text)
 		results = search_result['tracks']['items']
