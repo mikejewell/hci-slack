@@ -15,7 +15,7 @@ Uses a Redis backend to store/retrieve useful information for the group (e.g. li
 
 #### Required Environmental Variables
 
-HELP_SLACK_TOKEN: Set this to the value provided by Slack when you create your slash command.
+* HELP_SLACK_TOKEN: Set this to the value provided by Slack when you create your slash command.
 
 ### Jukebox
 
@@ -29,9 +29,9 @@ Once set up, you first need to head to http://yourapp.com/jukebox/authorise. Thi
 
 #### Required Environmental Variables
 
-HELP_SLACK_TOKEN: Set this to the value provided by Slack when you create your slash command.
-SPOTIFY_KEY: The Spotify app's client ID
-SPOTIFY_SECRET: The Spotify app's secret
-SPOTIFY_USERNAME: The user who owns the playlist
-SPOTIFY_PLAYLIST_ID: The ID of the playlist that you're sharing
-SPOTIFY_REDIRECT_URI: Should be http://yoursite.com/jukebox/callback
+* HELP_SLACK_TOKEN: Set this to the value provided by Slack when you create your slash command.
+* SPOTIFY_KEY: The Spotify app's client ID
+* SPOTIFY_SECRET: The Spotify app's secret
+* SPOTIFY_USERNAME: The user who owns the playlist
+* SPOTIFY_PLAYLIST_ID: The ID of the playlist that you're sharing
+* SPOTIFY_REDIRECT_URI: Should be http://yoursite.com/jukebox/callback
