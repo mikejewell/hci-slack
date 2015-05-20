@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 HELP_SLACK_TOKEN = os.environ.get('HELP_SLACK_TOKEN')
 JUKEBOX_SLACK_TOKEN = os.environ.get('JUKEBOX_SLACK_TOKEN')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')

@@ -8,6 +8,8 @@ from django.conf import settings
 from spotipy.oauth2 import SpotifyOAuth
 import spotipy
 
+from slack import utils
+
 auth = SpotifyOAuth(
 	settings.SPOTIFY_KEY, 
 	settings.SPOTIFY_SECRET, 
@@ -23,6 +25,8 @@ logger = logging.getLogger('testlogger')
 def index(request):
 	if request.POST.get('token') != settings.JUKEBOX_SLACK_TOKEN:
 		return HttpResponseForbidden()
+	username = request.POST.get('user_name')
+	channel = request.POST.get('channel_name')
 	text = request.POST.get('text', '')
 	token = auth.get_cached_token()
 	if token:
@@ -36,6 +40,12 @@ def index(request):
 			track = results[0]
 			artist = track['artists'][0]
 			sp.user_playlist_add_tracks(settings.SPOTIFY_USERNAME, settings.SPOTIFY_PLAYLIST_ID, [track['id']])
+			url = "https://play.spotify.com/user/"+settings.SPOTIFY_USERNAME+"/playlist/"+settings.SPOTIFY_PLAYLIST_ID
+			utils.send_message("@"+username+" added track: *"+track['name']+" ("+artist['name']+")* to the shared playlist (<"+url+">)", 
+				channel="@mikej",
+				username="Jukebox",
+				icon_emoji=":radio:" 
+				)
 			response = "Added track: *"+track['name']+" ("+artist['name']+")*"
 	else:
 		response = "Couldn't get token - maybe try authorizing again."
