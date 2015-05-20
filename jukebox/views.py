@@ -15,11 +15,15 @@ auth = SpotifyOAuth(
 	scope="playlist-modify-public playlist-modify-private",
 	cache_path='/tmp/jukebox.json')
 
-@require_http_methods(["POST"])
+import logging
+logger = logging.getLogger('testlogger')
+
+# @require_http_methods(["POST"])
 @csrf_exempt
 def index(request):
-	text = request.POST.get('text', '')
+	text = request.GET.get('text', '')
 	token = auth.get_cached_token()
+	logger.info(str(token))
 	if token:
 		sp = spotipy.Spotify(auth=token)
 		sp.trace = False
@@ -44,4 +48,5 @@ def callback(request):
 	code = request.GET.get('code')
 	state = request.GET.get('state')
 	token = auth.get_access_token(code)
+	logger.info("Storing at "+token.cache_path)
 	return HttpResponse(str(token))
