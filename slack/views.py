@@ -30,7 +30,7 @@ def link(request):
 		elif len(bits) == 2:
 			if bits[0] == 'rm':
 				redis.hdel('links', [bits[1]])
-				response = "Removed link"
+				response = "Removed link: "+bits[1]
 			else:
 				redis.hset('links', bits[0], bits[1])
 				response = 'Have set '+bits[0]+' to link to '+bits[1]
