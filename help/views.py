@@ -18,6 +18,8 @@ def index(request):
 	if request.POST.get('token') != settings.HELP_SLACK_TOKEN:
 		return HttpResponseForbidden()
 
+	username = request.POST.get('user_name')
+	channel = request.POST.get('channel_name')
 	text = request.POST.get('text', '')
 	usage = "Help Entries:\n /h <key> - look up a help entry\n/h list - show available help entries\n/h <key> <text> - create a new help entry\n/h rm <key> - remove a help entry"
 	response = usage
