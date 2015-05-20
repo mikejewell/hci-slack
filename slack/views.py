@@ -14,7 +14,7 @@ redis = redis.from_url(redis_url)
 @csrf_exempt
 def link(request):
 	text = request.POST.get('text', '')
-	usage = "Usage: /link <key> | list | <key> <url> | rm <key>"
+	usage = "Usage: /link <key> - get a link\n/link list - show available links\n/link <key> <url> - create a new link\n/link rm <key> - remove a link"
 	response = usage
 	if text != '':
 		bits = text.split(' ')
@@ -22,7 +22,7 @@ def link(request):
 			if text == 'list':
 				keys = redis.hkeys('links')
 				keys.sort()
-				response = 'Links available: '+','.join(keys)
+				response = 'Links available: '+', '.join(keys)
 			else:
 				response = '<'+redis.hget('links', bits[0])+'>'
 				if response == None:
