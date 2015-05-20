@@ -22,9 +22,9 @@ logger = logging.getLogger('testlogger')
 @csrf_exempt
 def index(request):
 	text = request.POST.get('text', '')
-	token = auth.get_cached_token()['access_token']
+	token = auth.get_cached_token()
 	if token:
-		sp = spotipy.Spotify(auth=token)
+		sp = spotipy.Spotify(auth=token['access_token'])
 		sp.trace = False
 		search_result = sp.search(text)
 		results = search_result['tracks']['items']
@@ -47,4 +47,4 @@ def callback(request):
 	code = request.GET.get('code')
 	state = request.GET.get('state')
 	token = auth.get_access_token(code)
-	return HttpResponse(str(token))
+	return HttpResponse("Authorized!")
