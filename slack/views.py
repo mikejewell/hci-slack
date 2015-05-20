@@ -22,7 +22,8 @@ def help(request):
 			if text == 'list':
 				keys = redis.hkeys('help')
 				keys.sort()
-				response = 'Entries available: '+', '.join(keys)
+				formatted_keys = ["*"+x+"*" for x in keys]
+				response = 'Entries available: '+', '.join(formatted_keys)
 			else:
 				entry = redis.hget('help', bits[0])
 				if entry == None:
