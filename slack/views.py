@@ -14,26 +14,26 @@ redis = redis.from_url(redis_url)
 @csrf_exempt
 def link(request):
 	text = request.POST.get('text', '')
-	usage = "Usage: /link <key> - get a link\n/link list - show available links\n/link <key> <url> - create a new link\n/link rm <key> - remove a link"
+	usage = "Help Entries:\n /h <key> - look up a help entry\n/h list - show available help entries\n/h <key> <text> - create a new help entry\n/link rm <key> - remove a help entry"
 	response = usage
 	if text != '':
 		bits = text.split(' ')
 		if len(bits) == 1:
 			if text == 'list':
-				keys = redis.hkeys('links')
+				keys = redis.hkeys('help')
 				keys.sort()
-				response = 'Links available: '+', '.join(keys)
+				response = 'Entries available: '+', '.join(keys)
 			else:
-				response = '<'+redis.hget('links', bits[0])+'>'
+				response = '<'+redis.hget('help', bits[0])+'>'
 				if response == None:
-					response = "Link does not exist."
+					response = "Entry does not exist."
 		elif len(bits) == 2:
 			if bits[0] == 'rm':
-				redis.hdel('links', bits[1])
-				response = "Removed link: "+bits[1]
+				redis.hdel('help', bits[1])
+				response = "Removed entry: "+bits[1]
 			else:
 				if bits[0] != 'rm' and bits[0] != 'list':
-					redis.hset('links', bits[0], bits[1])
-					response = 'Have set '+bits[0]+' to link to '+bits[1]
+					redis.hset('help', bits[0], bits[1])
+					response = 'Have set '+bits[0]+' to show to '+bits[1]
 
 	return HttpResponse(response)
