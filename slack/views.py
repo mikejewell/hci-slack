@@ -24,9 +24,10 @@ def help(request):
 				keys.sort()
 				response = 'Entries available: '+', '.join(keys)
 			else:
-				response = '<'+redis.hget('help', bits[0])+'>'
 				if response == None:
 					response = "Entry does not exist."
+				else:
+					response = redis.hget('help', bits[0])
 		elif len(bits) == 2:
 			if bits[0] == 'rm':
 				redis.hdel('help', bits[1])
