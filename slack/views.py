@@ -27,7 +27,7 @@ def help(request):
 				if response == None:
 					response = "Entry does not exist."
 				else:
-					response = redis.hget('help', bits[0])
+					response = "```"+redis.hget('help', bits[0])+"```"
 		elif len(bits) == 2:
 			if bits[0] == 'rm':
 				redis.hdel('help', bits[1])
@@ -35,6 +35,6 @@ def help(request):
 			else:
 				if bits[0] != 'rm' and bits[0] != 'list':
 					redis.hset('help', bits[0], bits[1])
-					response = 'Have set '+bits[0]+' to show to '+bits[1]
+					response = 'Have set '+bits[0]+' to show ```'+bits[1]+'```'
 
 	return HttpResponse(response)
