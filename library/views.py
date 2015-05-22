@@ -42,6 +42,11 @@ def authorise(request):
 		access_token=None, 
 		access_token_secret=None)
 	auth_url = gc.session.oauth_init()
+	details1 = {
+		'request_token':gc.session.request_token,
+		'request_token_secret':gc.session.request_token_secret,
+	}
+	write_token_data(details1)
 	url = auth_url + "&oauth_callback="+settings.GOODREADS_REDIRECT_URI
 	return redirect(url)
 
@@ -50,8 +55,11 @@ def callback(request):
 		settings.GOODREADS_SECRET, 
 		access_token=None, 
 		access_token_secret=None)
+	details2 = read_token_data()
+	gc.session.request_token = details2['request_token']
+	gc.session.request_token_secret = details2['request_token_secret']
 	
-	gc.session.session = gc.session.oauth_finalize()
+	gc.session.oauth_finalize()
 	details = {
 		'access_token':gc.session.session.access_token, 
 		'access_token_secret':gc.session.session.access_token_secret
