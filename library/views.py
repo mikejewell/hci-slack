@@ -86,6 +86,10 @@ def index(request):
 	if not token_data:
 		return HttpResponse("Unable to get token - is goodreads authorized?")
 
+	gc.session = GoodreadsSession(settings.GOODREADS_KEY, 
+		settings.GOODREADS_SECRET, 
+		access_token=token_data['access_token'], 
+		access_token_secret=token_data['access_token_secret'])
 	gc.session.access_token = token_data['access_token']
 	gc.session.access_token_secret = token_data['access_token_secret']
 	gc.session.oauth_resume()
@@ -116,5 +120,11 @@ def index(request):
 					books = resp['books']['book']
 					for book in books:
 						response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
-				
+			else:
+				# Assume we're adding a new book
+				book = gc.book(isbn=bits[0])
+				if not book:
+					response = "Couldn't locate book. Please check the ISBN number!"
+					gc.session.session.get("http://www.goodreads.com/shelf/add_to_shelf.xml", params={'name':username,'book_id':book.gid})
+					response = "Added book: "+book.title
 	return HttpResponse(response)
