@@ -124,6 +124,7 @@ def index(request):
 				book = gc.book(isbn=bits[0])
 				if not book:
 					response = "Couldn't locate book. Please check the ISBN number!"
+				else:
 					gc.session.session.get("http://www.goodreads.com/shelf/add_to_shelf.xml", params={'name':username,'book_id':book.gid})
 					response = "Added book: "+book.title
 	return HttpResponse(response)
