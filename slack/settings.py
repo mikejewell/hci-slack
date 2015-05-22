@@ -22,8 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
 HELP_SLACK_TOKEN = os.environ.get('HELP_SLACK_TOKEN')
 JUKEBOX_SLACK_TOKEN = os.environ.get('JUKEBOX_SLACK_TOKEN')
+LIBRARY_SLACK_TOKEN = os.environ.get('LIBRARY_SLACK_TOKEN')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
+
+GOODREADS_KEY = os.environ.get('GOODREADS_KEY')
+GOODREADS_SECRET = os.environ.get('GOODREADS_SECRET')
+GOODREADS_SHELF = os.environ.get('GOODREADS_SHELF')
+GOODREADS_USERID = os.environ.get('GOODREADS_USERID')
+
 SPOTIFY_KEY = os.environ.get('SPOTIFY_KEY')
 SPOTIFY_SECRET = os.environ.get('SPOTIFY_SECRET')
 SPOTIFY_USERNAME = os.environ.get('SPOTIFY_USERNAME')
@@ -34,6 +41,11 @@ SLACK_GENERAL_CHAT = os.environ.get("SLACK_GENERAL_CHAT")
 SLACK_RANDOM_CHAT = os.environ.get("SLACK_RANDOM_CHAT")
 ALLOWED_HOSTS = []
 
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Storage'
 
 # Application definition
 
@@ -44,8 +56,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'help',
     'jukebox',
+    # 'library',
 )
 
 MIDDLEWARE_CLASSES = (

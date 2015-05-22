@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^help/', include('help.urls')),
     url(r'^jukebox/', include('jukebox.urls')),
+    # url(r'^library/', include('library.urls')),
 ]
