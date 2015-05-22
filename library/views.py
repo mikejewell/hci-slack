@@ -31,5 +31,5 @@ def index(request):
 				books = resp['books']['book']
 				response = "Library contents:\n"
 				for book in books:
-					response += book['title']+" - "+book['authors']['author']['name']+"("+book['isbn']+")\n"
+					response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
 	return HttpResponse(response)
