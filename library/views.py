@@ -41,6 +41,6 @@ def index(request):
 					resp = gc.request("review/list.xml", {'page':1,'format':'xml', 'id':settings.GOODREADS_USERID, 'shelf':shelf_name})
 					books = resp['books']['book']
 					for book in books:
-						response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+", @"+owner+")\n"
+						response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
 				
 	return HttpResponse(response)
