@@ -12,6 +12,8 @@ import os
 import redis
 import json
 
+@require_http_methods(["POST"])
+@csrf_exempt
 def index(request):
 	if request.POST.get('token') != settings.LIBRARY_SLACK_TOKEN:
 		return HttpResponseForbidden()
