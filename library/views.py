@@ -40,7 +40,7 @@ def authorise(request):
 		settings.GOODREADS_SECRET, 
 		access_token=None, 
 		access_token_secret=None)
-	auth_url = gc.oauth_init()
+	auth_url = gc.session.oauth_init()
 	url = auth_url + "&oauth_callback="+settings.GOODREADS_REDIRECT_URI
 	return redirect(url)
 
