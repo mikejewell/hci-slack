@@ -46,6 +46,11 @@ def authorise(request):
 	return redirect(url)
 
 def callback(request):
+	gc.session = GoodreadsSession(settings.GOODREADS_KEY, 
+		settings.GOODREADS_SECRET, 
+		access_token=None, 
+		access_token_secret=None)
+	
 	gc.session.session = gc.session.oauth_finalize()
 	details = {
 		'access_token':gc.session.session.access_token, 
