@@ -6,7 +6,7 @@ from django.conf import settings
 from slack import utils
 from django.core.files.storage import default_storage
 from django.shortcuts import redirect
-
+from rauth.service import OAuth1Service, OAuth1Session
 from goodreads import client
 from goodreads.session import GoodreadsSession
 gc = client.GoodreadsClient(settings.GOODREADS_KEY, settings.GOODREADS_SECRET)
@@ -55,6 +55,15 @@ def callback(request):
 		settings.GOODREADS_SECRET, 
 		access_token=None, 
 		access_token_secret=None)
+	gs.session.service = OAuth1Service(
+            consumer_key=settings.GOODREADS_KEY,
+            consumer_secret=settings.GOODREADS_SECRET,
+            name='goodreads',
+            request_token_url='http://www.goodreads.com/oauth/request_token',
+            authorize_url='http://www.goodreads.com/oauth/authorize',
+            access_token_url='http://www.goodreads.com/oauth/access_token',
+            base_url='http://www.goodreads.com/'
+        )
 	details2 = read_token_data()
 	gc.session.request_token = details2['request_token']
 	gc.session.request_token_secret = details2['request_token_secret']
