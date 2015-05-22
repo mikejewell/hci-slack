@@ -121,7 +121,6 @@ def index(request):
 					for book in books:
 						response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
 			else:
-				# Assume we're adding a new book
 				book = gc.book(isbn=bits[0])
 				if not book:
 					response = "Couldn't locate book. Please check the ISBN number!"
