@@ -5,6 +5,7 @@ from django.views.decorators.http import require_http_methods
 from django.conf import settings
 from slack import utils
 from django.core.files.storage import default_storage
+from django.shortcuts import redirect
 
 from goodreads import client
 from goodreads.session import GoodreadsSession
