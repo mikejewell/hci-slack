@@ -23,13 +23,24 @@ def index(request):
 	text = request.POST.get('text', '')
 	usage = "Library:\n /l list - show available books\n"
 	response = usage
+	ignored_shelves = ['read', 'currently-reading', 'to-read', 'hcibay']
 	if text != '':
 		bits = text.split(' ', 1)
 		if len(bits) == 1:
 			if text == 'list':
-				resp = gc.request("review/list.xml", {'page':1,'format':'xml', 'id':settings.GOODREADS_USERID, 'shelf':settings.GOODREADS_SHELF})
-				books = resp['books']['book']
-				response = "Library contents:\n"
-				for book in books:
-					response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
+				user = gc.user(settings.GOODREADS_USERID)
+				shelves = user.shelves()
+				shelf_list = []
+				for shelf in shelves:
+					if shelf['name'] not in ignored_shelves:
+						shelf_list.append(shelf['name'])
+				shelf_list.sort()
+				response = ""
+				for shelf_name in shelf_list:
+					response += "Books with @"+shelf_name+":\n"
+					resp = gc.request("review/list.xml", {'page':1,'format':'xml', 'id':settings.GOODREADS_USERID, 'shelf':shelf_name})
+					books = resp['books']['book']
+					for book in books:
+						response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+", @"+owner+")\n"
+				
 	return HttpResponse(response)
