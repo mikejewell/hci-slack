@@ -7,6 +7,7 @@ from slack import utils
 from django.core.files.storage import default_storage
 
 from goodreads import client
+from goodreads.session import GoodreadsSession
 gc = client.GoodreadsClient(settings.GOODREADS_KEY, settings.GOODREADS_SECRET)
 
 import os
@@ -61,7 +62,7 @@ def index(request):
 	token_data = read_token_data()
 	if not token_data:
 		return HttpResponse("Unable to get token - is goodreads authorized?")
-	
+
 	gc.session.access_token = token_data['access_token']
 	gc.session.access_token_secret = token_data['access_token_secret']
 	gc.session.oauth_resume()
