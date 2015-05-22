@@ -55,7 +55,7 @@ def callback(request):
 		settings.GOODREADS_SECRET, 
 		access_token=None, 
 		access_token_secret=None)
-	gs.session.service = OAuth1Service(
+	gc.session.service = OAuth1Service(
             consumer_key=settings.GOODREADS_KEY,
             consumer_secret=settings.GOODREADS_SECRET,
             name='goodreads',
