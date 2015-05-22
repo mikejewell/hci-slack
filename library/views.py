@@ -37,7 +37,7 @@ def read_token_data():
 
 def authorise(request):
 	gc.session = GoodreadsSession(settings.GOODREADS_KEY, 
-		settings.GOODREADS_CLIENT, 
+		settings.GOODREADS_SECRET, 
 		access_token=None, 
 		access_token_secret=None)
 	auth_url = gc.oauth_init()
