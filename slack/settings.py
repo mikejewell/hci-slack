@@ -59,7 +59,7 @@ INSTALLED_APPS = (
     'storages',
     'help',
     'jukebox',
-    # 'library',
+    'library',
 )
 
 MIDDLEWARE_CLASSES = (
