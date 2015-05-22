@@ -51,6 +51,13 @@ def index(request):
 		response = "Couldn't get token - maybe try authorizing again."
 	return HttpResponse(response)
 
+@csrf_exempt
+def test(request):
+	f = open('/tmp/jukebox.json')
+	info = f.read()
+	f.close()
+	return HttpResponse(info)
+
 def authorise(request):
 	url = auth.get_authorize_url()
 	return redirect(url)
