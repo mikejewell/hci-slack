@@ -99,7 +99,7 @@ def index(request):
 	username = request.POST.get('user_name')
 	channel = request.POST.get('channel_name')
 	text = request.POST.get('text', '')
-	usage = "Library:\n /l list - show available books\n"
+	usage = "Library:\n /l list - show available books\n /l <isbn> - add a book to your shelf\n /l rm <isbn> - remove a book from your shelf."
 	response = usage
 	ignored_shelves = ['read', 'currently-reading', 'to-read', 'hcibay']
 	if text != '':
