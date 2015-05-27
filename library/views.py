@@ -117,11 +117,12 @@ def index(request):
 				for shelf_name in shelf_list:
 					response += "Books with @"+shelf_name+":\n"
 					resp = gc.request("review/list.xml", {'page':1,'format':'xml', 'id':settings.GOODREADS_USERID, 'shelf':shelf_name})
-					books = resp['books']['book']
-					if type(books) != list:
-						books = [books]
-					for book in books:
-						response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
+					if 'book' in resp['books']:
+						books = resp['books']['book']
+						if type(books) != list:
+							books = [books]
+						for book in books:
+							response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
 			else:
 				book = gc.book(isbn=bits[0])
 				if not book:
