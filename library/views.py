@@ -115,9 +115,9 @@ def index(request):
 				shelf_list.sort()
 				response = ""
 				for shelf_name in shelf_list:
-					response += "Books with @"+shelf_name+":\n"
 					resp = gc.request("review/list.xml", {'page':1,'format':'xml', 'id':settings.GOODREADS_USERID, 'shelf':shelf_name})
 					if 'book' in resp['books']:
+						response += "Books with @"+shelf_name+":\n"
 						books = resp['books']['book']
 						if type(books) != list:
 							books = [books]
