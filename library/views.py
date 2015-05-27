@@ -122,7 +122,7 @@ def index(request):
 						if type(books) != list:
 							books = [books]
 						for book in books:
-							response += "*"+book['title']+" - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
+							response += "*<http://amazon.co.uk/gp/product/"+book['isbn']+"|"+book['title']+"> - "+book['authors']['author']['name']+"* ("+book['isbn']+")\n"
 			else:
 				book = None
 				try:
